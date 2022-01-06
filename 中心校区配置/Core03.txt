@@ -1,0 +1,45 @@
+en
+conf t
+hostname Core03
+enable secret UJN1948
+line console 0
+password Console1948
+login
+line vty 0 4
+password Telnet1948
+login
+service password-encryption 
+=====Core03上设置相应的VLAN=====
+en
+conf t
+vlan 11
+vlan 111
+vlan 12
+vlan 121
+vlan 13
+vlan 131
+=====以太网通道LACP=====
+int range fa0/14 - 15
+channel-protocol lacp
+channel-group 2 mode active
+interface port-channel 2
+sw tr en do
+sw mo tr
+sw tr all vl 11,111,12,121,13,131
+
+int range fa0/12 - 13
+channel-protocol lacp
+channel-group 3 mode active
+interface port-channel 3
+sw tr en do
+sw mo tr
+sw tr all vl 11,111,12,121,13,131
+
+int f0/1
+sw tr en do
+sw mo tr
+sw tr all vl 11,111,12,121,13,131
+
+
+
+

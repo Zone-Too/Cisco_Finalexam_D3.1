@@ -1,0 +1,115 @@
+en
+conf t
+hostname Zhongxin
+enable secret UJN1948
+line console 0
+password Console1948
+login
+line vty 0 4
+password Telnet1948
+login
+service password-encryption 
+
+=======================
+en
+conf t
+
+int f0/0.11
+en do 11
+ip add 10.1.191.254 255.255.240.0
+
+int f0/0.111
+en do 111
+ip add 10.200.7.254 255.255.248.0
+
+int f0/0.12
+en do 12
+ip add 10.12.73.254 255.255.254.0
+
+int f0/0.121
+en do 121
+ip add 10.200.95.254 255.255.248.0
+
+int f0/0.13
+en do 13
+ip add 10.100.9.254 255.255.255.128
+
+int f0/0.131
+en do 131
+ip add 10.200.247.254 255.255.248.0
+
+int f0/0
+no shut
+=====IPV4 DHCP=====
+ip dhcp pool VLAN11
+network 10.1.176.0 255.255.240.0
+dns-server 202.194.64.1
+default-router 10.1.191.254
+
+ip dhcp pool VLAN111
+network 10.200.0.0 255.255.248.0
+dns-server 202.194.64.1
+default-router 10.200.7.254
+
+ip dhcp pool VLAN12
+network 10.12.72.0 255.255.254.0
+dns-server 202.194.64.1
+default-router 10.12.73.254
+
+ip dhcp pool VLAN121
+network 10.200.88.0 255.255.248.0
+dns-server 202.194.64.1
+default-router 10.200.95.254
+
+ip dhcp pool VLAN13
+network 10.100.9.128 255.255.255.128
+dns-server 202.194.64.1
+default-router 10.100.9.254
+
+ip dhcp pool VLAN131
+network 10.200.240.0 255.255.248.0
+dns-server 202.194.64.1
+default-router 10.200.247.254
+
+=====IPV6 自动配置======
+ipv6 unicast-routing 
+ipv6 dhcp pool VLAN12
+dns-server 2001:db8:acad:FFFF::1
+ipv6 dhcp pool VLAN13
+address prefix 2001:db8:acad:100::/64
+dns-server 2001:db8:acad:FFFF::1
+
+int f0/0.11
+ipv6 enable
+ipv6 address 2001:db8:acad:2::1/64
+
+int f0/0.12
+ipv6 enable
+ipv6 address 2001:db8:acad:12::1/64
+ipv6 nd other-config-flag
+ipv6 dhcp server VLAN12
+
+int f0/0.13
+ipv6 enable
+ipv6 address 2001:db8:acad:100::1/64
+ipv6 nd other-config-flag
+ipv6 nd managed-config-flag
+ipv6 dhcp server VLAN13
+
+=====互联=====
+int s0/3/0
+ip add 192.168.100.1 255.255.255.252
+no shut
+=====静态路由=====
+ip route 172.30.32.0 255.255.240.0 192.168.100.2
+ip route 172.30.96.0 255.255.240.0 192.168.100.2
+ip route 172.30.160.0 255.255.240.0 192.168.100.2
+ip route 172.30.224.0 255.255.240.0 192.168.100.2
+ip route 172.31.0.128 255.255.255.192 192.168.100.2
+ip route 172.31.2.64 255.255.255.192 192.168.100.2
+ip route 172.31.3.128 255.255.255.192 192.168.100.2
+ip route 172.31.7.0 255.255.255.192 192.168.100.2
+
+
+
+

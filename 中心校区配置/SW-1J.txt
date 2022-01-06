@@ -1,0 +1,29 @@
+en
+conf t
+hostname 1J
+enable secret UJN1948
+line console 0
+password Console1948
+login
+line vty 0 4
+password Telnet1948
+login
+service password-encryption 
+=====1J：有线网络使用vlan11，无线网络使用vlan111====
+en
+conf t
+vlan 11
+vlan 111
+int f0/24
+sw mo acc
+sw acc vl 11
+int g0/1
+sw mo acc
+sw acc vl 111
+int f0/1
+sw mo tr
+sw tr all vl 11,111
+int f0/2
+sw mo tr
+sw tr all vl 11,111
+

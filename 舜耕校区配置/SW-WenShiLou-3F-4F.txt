@@ -1,0 +1,14 @@
+en
+conf t
+hostname SW-WenShiLou-3F-4F
+vlan 30
+vlan 40
+int f0/7
+sw mo acc
+sw acc vl 30
+int f0/11
+sw mo acc
+sw acc vl 40
+int f0/3
+sw mo tr
+sw tr all vl 30,40

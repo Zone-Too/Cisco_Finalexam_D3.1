@@ -1,0 +1,15 @@
+先删接口
+
+switch（config）#int range f0/1-5
+
+switch（config-if）#no switchport access vlan 20
+
+switch（config-if）#exit
+
+再删除配置接口
+
+switch（config）#no int vlan 20
+
+删除VLAN
+
+switch（config）#no vlan 20

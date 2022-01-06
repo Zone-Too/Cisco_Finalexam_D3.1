@@ -1,0 +1,60 @@
+en
+conf t
+hostname Core02
+enable secret UJN1948
+line console 0
+password Console1948
+login
+line vty 0 4
+password Telnet1948
+login
+service password-encryption 
+
+=====Core02上设置相应的VLAN=====
+en
+conf t
+vlan 11
+vlan 111
+vlan 12
+vlan 121
+vlan 13
+vlan 131
+int f0/2
+sw tr en do
+sw mo tr
+sw tr all vl 11,111
+int f0/12
+sw tr en do
+sw mo tr
+sw tr all vl 12,121
+int f0/22
+sw tr en do
+sw mo tr
+sw tr all vl 13,131
+=====以太网通道LACP=====
+int range fa0/23 - 24
+channel-protocol lacp
+channel-group 1 mode active
+interface port-channel 1
+sw tr en do
+sw mo tr
+sw tr all vl 11,111,12,121,13,131
+
+int range fa0/14 - 15
+channel-protocol lacp
+channel-group 2 mode active
+interface port-channel 2
+sw tr en do
+sw mo tr
+sw tr all vl 11,111,12,121,13,131 
+
+spanning-tree mode pvst
+spanning-tree vlan 111,121,131 root primary
+spanning-tree vlan 11,12,13 root secondary
+
+
+
+
+
+
+

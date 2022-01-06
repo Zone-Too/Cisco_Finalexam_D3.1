@@ -1,0 +1,19 @@
+en
+conf t
+hostname SW-WenShiLou
+vlan 10
+vlan 20
+vlan 30
+vlan 40
+int f0/1
+sw tr en do
+sw mo tr
+sw tr all vl 10,20
+int f0/3
+sw tr en do
+sw mo tr
+sw tr all vl 30,40
+int  fa0/2
+sw tr en do
+sw mo tr
+sw tr all vl 10,20,30,40

@@ -1,0 +1,29 @@
+en
+conf t
+hostname 12J
+enable secret UJN1948
+line console 0
+password Console1948
+login
+line vty 0 4
+password Telnet1948
+login
+service password-encryption 
+
+=====12J：有线网络使用vlan12，无线网络使用vlan121====
+en
+conf t
+vlan 12
+vlan 121
+int f0/24
+sw mo acc
+sw acc vl 12
+int g0/1
+sw mo acc
+sw acc vl 121
+int f0/1
+sw mo tr
+sw tr all vl 12,121
+int f0/2
+sw mo tr
+sw tr all vl 12,121

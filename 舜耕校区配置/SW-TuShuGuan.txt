@@ -1,0 +1,19 @@
+en
+conf t
+hostname SW-TuShuGuan
+vlan 110
+vlan 120
+vlan 130
+vlan 140
+int f0/7
+sw tr en do
+sw mo tr
+sw tr all vl 110,120
+int f0/18
+sw tr en do
+sw mo tr
+sw tr all vl 130,140
+int  fa0/23
+sw tr en do
+sw mo tr
+sw tr all vl 110,120,130,140

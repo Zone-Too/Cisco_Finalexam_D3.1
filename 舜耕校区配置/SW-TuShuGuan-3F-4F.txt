@@ -1,0 +1,14 @@
+en
+conf t
+hostname SW-TuShuGuan-3F-4F
+vlan 130
+vlan 140
+int f0/15
+sw mo acc
+sw acc vl 130
+int f0/18
+sw mo acc
+sw acc vl 140
+int f0/12
+sw mo tr
+sw tr all vl 130,140

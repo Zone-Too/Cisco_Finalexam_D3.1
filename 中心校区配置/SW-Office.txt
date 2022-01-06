@@ -1,0 +1,29 @@
+en
+conf t
+hostname Office
+enable secret UJN1948
+line console 0
+password Console1948
+login
+line vty 0 4
+password Telnet1948
+login
+service password-encryption 
+
+=====Office：有线网络使用vlan13，无线网络使用vlan131
+en
+conf t
+vlan 13
+vlan 131
+int f0/24
+sw mo acc
+sw acc vl 13
+int g0/1
+sw mo acc
+sw acc vl 131
+int f0/1
+sw mo tr
+sw tr all vl 13,131
+int f0/2
+sw mo tr
+sw tr all vl 13,131

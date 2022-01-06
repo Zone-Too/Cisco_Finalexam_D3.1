@@ -1,0 +1,83 @@
+en
+conf t
+hostname R2-Center-East
+
+int g0/0.10
+en do 10
+
+ip add 172.30.47.254 255.255.240.0
+int g0/0.20
+en do 20
+ip add 172.30.111.254 255.255.240.0
+
+int g0/0.30
+en do 30
+ip add 172.30.175.254 255.255.240.0
+int g0/0.40
+en do 40
+ip add 172.30.239.254 255.255.240.0
+
+int g0/2.110
+en do 110
+ip add 172.31.0.190 255.255.255.192
+int g0/2.120
+en do 120
+ip add 172.31.2.126 255.255.255.192
+
+int g0/2.130
+en do 130
+ip add 172.31.3.190 255.255.255.192
+int g0/2.140
+en do 140
+ip add 172.31.7.62 255.255.255.192
+
+int g0/0
+no shut
+int g0/2
+no shut
+=====IPV4 DHCP=====
+ip dhcp pool VLAN10
+network 172.30.32.0 255.255.240.0
+dns-server 202.194.64.1
+default-router 172.30.47.254
+ip dhcp pool VLAN20
+network 172.30.96.0 255.255.240.0
+dns-server 202.194.64.1
+default-router 172.30.111.254
+ip dhcp pool VLAN30
+network 172.30.160.0 255.255.240.0
+dns-server 202.194.64.1
+default-router 172.30.175.254
+ip dhcp pool VLAN40
+network 172.30.224.0 255.255.240.0
+dns-server 202.194.64.1
+default-router 172.30.239.254
+
+ip dhcp pool VLAN110
+network 172.31.0.128 255.255.255.192
+dns-server 202.194.64.1
+default-router 172.31.0.190
+ip dhcp pool VLAN120
+network 172.31.2.64 255.255.255.192
+dns-server 202.194.64.1
+default-router 172.31.2.126
+ip dhcp pool VLAN130
+network 172.31.3.128 255.255.255.192
+dns-server 202.194.64.1
+default-router 172.31.3.190
+ip dhcp pool VLAN140
+network 172.31.7.0 255.255.255.192
+dns-server 202.194.64.1
+default-router 172.31.7.62
+
+=====互联=====
+int s0/3/0
+ip add 192.168.100.2 255.255.255.252
+no sh
+======静态路由=====
+ip route 0.0.0.0 0.0.0.0 192.168.100.1
+
+
+
+
+
